@@ -22,12 +22,10 @@
 (defconstant generic-read 2147483648)
 (defconstant generic-write 1073741824)
 (defconstant invalid-file-size 4294967295)
-(defconstant invalid-handle-value
-  (if (boundp 'invalid-handle-value)
-      invalid-handle-value
-      (if (= 8 (cffi:foreign-type-size :pointer))
-          (cffi:make-pointer (ldb (byte 64 0) -1))
-          (cffi:make-pointer (ldb (byte 32 0) -1)))))
+(defparameter invalid-handle-value
+  (if (= 8 (cffi:foreign-type-size :pointer))
+      (cffi:make-pointer (ldb (byte 64 0) -1))
+      (cffi:make-pointer (ldb (byte 32 0) -1))))
 (defconstant open-always 4)
 (defconstant open-existing 3)
 (defconstant page-execute-read 32)
